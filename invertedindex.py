@@ -10,7 +10,16 @@ class InvertedIndex:
 
     def query(self, words: list) -> list:
         """Return the list of relevant documents for the given query"""
-        lowercase_words = [x.lower() for x in words]
+        if len(words) < 1: #check for empty data
+            print('No arguments')
+            return None
+
+        for word in words: #check for data == str
+            if word is not str:
+                print('One of the input words is not int')
+                return None
+
+        lowercase_words = [x.lower() for x in words] #fast check for missing word
         for word in lowercase_words:
             if word in self.inverted_index.keys():
                 pass
@@ -50,7 +59,7 @@ def build_inverted_index(documents):  # построить инвертиров�
     all_unique_words = set()
     article_id_to_list_of_words_in_article = {}  # словарь {id статьи : множество слов в статье}
     for article in list_of_articles:
-        list_of_words = re.sub(r'\W', " ", article, flags=re.I).split()
+        list_of_words = re.sub(r'\W', ' ', article, flags=re.I).split()
         lowercase_list_of_words = [x.lower() for x in list_of_words]
         set_of_words = set(lowercase_list_of_words)
         all_unique_words.update(set_of_words)
