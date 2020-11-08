@@ -50,3 +50,4 @@ class TestClass1:
     def test_for_empty_list(self, inverted_index):
         result = inverted_index.query([1, [2, 3], {4: 5}, '6,8'])
         assert result is None
+

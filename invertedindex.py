@@ -10,16 +10,16 @@ class InvertedIndex:
 
     def query(self, words: list) -> list:
         """Return the list of relevant documents for the given query"""
-        if len(words) < 1: #check for empty data
+        if len(words) < 1:  # check for empty data
             print('No arguments')
             return None
 
-        for word in words: #check for data == str
+        for word in words:  # check for data == str
             if word is not str:
-                print('One of the input words is not int')
+                print('One of the input words is not str type')
                 return None
 
-        lowercase_words = [x.lower() for x in words] #fast check for missing word
+        lowercase_words = [x.lower() for x in words]  # fast check for missing word
         for word in lowercase_words:
             if word in self.inverted_index.keys():
                 pass
@@ -82,8 +82,38 @@ def build_inverted_index(documents):  # построить инвертиров�
     return InvertedIndex(inverted_index)
 
 
+class JsonStoragePolicy:
+    @staticmethod
+    def dump(word_to_docs_mapping, filepath: str):
+        pass
+
+    @staticmethod
+    def load(filepath: str):
+        pass
+
+
+class PickleStoragePolicy:
+    @staticmethod
+    def dump(word_to_docs_mapping, filepath: str):
+        pass
+
+    @staticmethod
+    def load(filepath: str):
+        pass
+
+
+class ZlibStoragePolicy:
+    @staticmethod
+    def dump(word_to_docs_mapping, filepath: str):
+        pass
+
+    @staticmethod
+    def load(filepath: str):
+        pass
+
+
 def main():
-    documents = load_documents("C:\\Users\\User\\PycharmProjects\\inverted_index_lib\\test_data")
+    documents = load_documents("C:\\Users\\User\\PycharmProjects\\inverted_index_lib\\wikipedia_sample")
     inverted_index = build_inverted_index(documents)
     inverted_index.dump("inverted.index")
     inverted_index = InvertedIndex.load("inverted.index")
